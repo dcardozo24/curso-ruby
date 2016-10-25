@@ -13,4 +13,4 @@ p arr.select { |element| element % 3 == 0 }
 #y utilzar 'sort' y 'reverse' para ordenar de forma descendente
 #Implementar todo esto en una sola linea de código
 puts "Resultado final: "
-#p arr.select { |element| element % 3 == 0 }
+p arr.select { |element| element
