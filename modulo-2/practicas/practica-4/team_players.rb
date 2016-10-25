@@ -1,6 +1,11 @@
 class Player
-  #attr_reader
-  #initialize
+  attr_reader :name, :age, :skill_level
+
+  def initialize(name, age, skill_level)
+    @name = name
+    @age = age
+    @skill_level = skill_level
+  end
 
   def to_s
     "<#{name}: #{skill_level}(SL), #{age}(AGE)>"
@@ -9,9 +14,23 @@ class Player
 end
 
 class Team
-  #attr_accessor
-  #initialize
-  #add_players
+  include Enumerable
+
+  attr_accessor :name
+ 
+  def initialize(name)
+    @name = name
+    @players = []
+  end
+
+  def add_players(*player)
+      @players += player
+     # @players = @players + player
+  end
+
+  def each
+   @players.each { |player| yield player }
+  end
 
   def to_s
     "#{@name} team: #{@players.join(", ")}"
@@ -30,6 +49,7 @@ red_team.add_players(player1, player2, player3, player4, player5)
 
 # Seleccionar únicamente los jugadores entre 14 y 20 años y no incluir a ningún jugador con skill-level menor a 4.5
 elig_players = []#COLOCAR AQUÍ LA SELECCION#
+elig_players = red_team.select{|team| team.age >= 14 and team.age <= 20 and team.skill_level >= 4.5}
 puts elig_players
 # DEBE IMPRIMIR
 # => <Jim: 4.5(SL), 15(AGE)>
